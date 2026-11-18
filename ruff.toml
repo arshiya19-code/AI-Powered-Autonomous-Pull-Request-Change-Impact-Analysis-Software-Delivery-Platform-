@@ -1,0 +1,37 @@
+# Prototype lint policy: keep correctness checks high-signal without requiring a
+# repository-wide modernization or formatting rewrite.
+extend-exclude = [
+    "data",
+    ".tmp",
+    "tmp",
+    ".venv",
+    ".venv-ci",
+    "node_modules",
+    "artifacts",
+    "reports",
+    "backend/migrations",
+]
+
+[lint]
+# Syntax/IO errors, invalid control flow and assertions, undefined names and
+# exports, import/future-import errors, and Pylint's runtime error rules.
+select = [
+    "E9",
+    "F402",
+    "F404",
+    "F406",
+    "F407",
+    "F63",
+    "F7",
+    "F82",
+    "F901",
+    "PLE",
+]
+ignore = [
+    "E701",
+    "E702",
+]
+
+[lint.per-file-ignores]
+# Compatibility tests may import public symbols solely to prove availability.
+"tests/**/*.py" = ["F401"]
